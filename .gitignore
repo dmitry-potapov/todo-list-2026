@@ -1,0 +1,84 @@
+## Build and compilation outputs
+bin/
+obj/
+out/
+[Bb]uild/
+
+## Visual Studio / Roslyn / MSBuild artifacts
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.userprefs
+*.cache
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+
+## JetBrains Rider & Resharper
+.idea/
+*.sln.iml
+_ReSharper*/
+*.ReSharper
+*.ReSharper.user
+
+## Visual Studio Code
+*.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+## .NET Core / .NET 10 tools & user secrets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+.dotnet/
+appsettings*.Development.json
+appsettings*.Local.json
+
+## Publish and NuGet packages
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+packages/
+**/packages/*
+
+## Testing & Code Coverage
+TestResults/
+*.mdf
+*.ldf
+*.pfx
+*.publishsettings
+coverage*.xml
+coverage*.json
+*.coverage
+*.coveragexml
+
+## OS-generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini

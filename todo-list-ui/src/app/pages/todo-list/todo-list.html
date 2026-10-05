@@ -1,0 +1,8 @@
+<ul>
+    @for (item of items(); track item.id) {
+        <li>
+            {{ item.description }}
+            <button (click)="editItem(item)">Edit</button>
+        </li>
+    }
+</ul>
