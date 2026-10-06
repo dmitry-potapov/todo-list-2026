@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
 import { ListItem } from '../../models/ListItem';
 import { ApiService } from '../../services/api-service';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { form, FormField } from '@angular/forms/signals';
+import { Observer } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -14,27 +14,27 @@ export class TodoList {
   private readonly _apiService = inject(ApiService);
 
   private activeItem = signal<ListItem>({description:''});
+  errorMessage = signal<string>('');
   todoForm = form(this.activeItem);
   descriptionEmpty = computed<boolean>(() => !this.activeItem().description);
 
   items = signal<ListItem[]>([]);
+
+  updatePageObserver: Observer<ListItem> = {
+    next: _ => this.reloadItems(),
+    error: err => this.displayError(err.message),
+    complete: () => {}
+  };
 
   constructor() {
     this.reloadItems();
   }
 
   saveTodo() {
-    console.log(this.activeItem());
-    if (!this.activeItem().id) {
-      this._apiService.CreateItem(this.activeItem()).subscribe(_ => {
-        this.reloadItems();
-      });
-    }
-    else {
-      this._apiService.UpdateItem(this.activeItem()).subscribe(_ => {
-        this.reloadItems();
-      });
-    }
+      (!this.activeItem().id 
+        ? this._apiService.CreateItem(this.activeItem()) 
+        : this._apiService.UpdateItem(this.activeItem()))
+      .subscribe(this.updatePageObserver);
   }
 
   startEditingTodo(item: ListItem) {
@@ -42,15 +42,26 @@ export class TodoList {
   }
 
   deleteTodo(item: ListItem) {
-    this._apiService.DeleteItem(item).subscribe(_ => this.reloadItems());
+    this._apiService.DeleteItem(item)
+      .subscribe(this.updatePageObserver);
   }
 
   reloadItems() {
     this.clearSelection();
-    this._apiService.GetAllItems().subscribe(items => this.items.set(items));
+    this._apiService.GetAllItems()
+      .subscribe({
+        next: items => this.items.set(items),
+        error: (error) => this.displayError(error.message)
+      });
   }
 
   clearSelection() {
     this.activeItem.set({description:''});
+  }
+
+  displayError(error: any) {
+    this.errorMessage.set(
+      `An error occurred. Please refresh the page or try again later:\n${error}`
+    );
   }
 }

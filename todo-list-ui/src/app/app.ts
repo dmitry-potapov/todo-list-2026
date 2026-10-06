@@ -8,5 +8,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('todo-list-ui');
+  protected readonly title = signal('Yet another to do list');
 }

@@ -1,5 +1,12 @@
 <div class="root">
+    <!-- 
+        The error message, the input and the list could be moved to separate components, 
+        but for sake of simplicity they are left as is
+    -->
     <h1>Todo List</h1>
+    @if (!!errorMessage()) {
+        <div class="error">{{ errorMessage() }}</div>
+    }
     <div>
         <input type="text" placeholder="Type a todo description here..." [formField]="todoForm.description" />
         <button [disabled]="descriptionEmpty()" (click)="saveTodo()">Save</button>
