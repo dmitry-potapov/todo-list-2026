@@ -3,7 +3,6 @@ using YetAnother.TodoList.Domain;
 
 namespace YetAnother.TodoList.Infrastructure;
 
-
 public class TodoDbContext : DbContext
 {
     public TodoDbContext(DbContextOptions<TodoDbContext> options)

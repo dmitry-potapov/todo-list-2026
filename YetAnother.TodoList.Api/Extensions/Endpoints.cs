@@ -29,14 +29,14 @@ public static class Endpoints
         return app;
     }
 
-    private static async Task<IResult> GetAllItemsAsync(ITodoItemRepository todoItemRepository)
+    internal static async Task<IResult> GetAllItemsAsync(ITodoItemRepository todoItemRepository)
     {
         return TypedResults.Ok(
             (await todoItemRepository.GetAllItemsAsync()).Select(g => g.ToDto())
         );
     }
 
-    private static async Task<IResult> CreateItem(TodoItemDto dto, ITodoItemRepository todoItemRepository)
+    internal static async Task<IResult> CreateItem(TodoItemDto dto, ITodoItemRepository todoItemRepository)
     {
         if (string.IsNullOrEmpty(dto.Description))
         {
@@ -48,7 +48,7 @@ public static class Endpoints
         return TypedResults.Ok(result);
     }
 
-    private static async Task<IResult> UpdateItem(int id, TodoItemDto dto, ITodoItemRepository todoItemRepository)
+    internal static async Task<IResult> UpdateItem(int id, TodoItemDto dto, ITodoItemRepository todoItemRepository)
     {
         if (string.IsNullOrEmpty(dto?.Description))
         {
@@ -60,7 +60,7 @@ public static class Endpoints
         return TypedResults.Ok(result);
     }
 
-    private static async Task<IResult> DeleteItem(int id, ITodoItemRepository todoItemRepository)
+    internal static async Task<IResult> DeleteItem(int id, ITodoItemRepository todoItemRepository)
     {
         await todoItemRepository.DeleteItem(id);
 

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.EntityFrameworkCore;
 using YetAnother.TodoList.Application.Repositories;
 using YetAnother.TodoList.Domain;

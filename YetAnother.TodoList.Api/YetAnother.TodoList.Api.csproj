@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="YetAnother.TodoList.UnitTests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../YetAnother.TodoList.Application/YetAnother.TodoList.Application.csproj" />
     <ProjectReference Include="../YetAnother.TodoList.Infrastructure/YetAnother.TodoList.Infrastructure.csproj" />
   </ItemGroup>
