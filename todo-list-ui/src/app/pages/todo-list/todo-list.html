@@ -1,8 +1,15 @@
+<h1>Todo List</h1>
+<div>
+    <input type="text" [formField]="todoForm.description" />
+    <button [disabled]="descriptionEmpty()" (click)="saveTodo()">Save</button>
+    <button [disabled]="descriptionEmpty()" (click)="clearSelection()">Clear</button>
+</div>
 <ul>
     @for (item of items(); track item.id) {
         <li>
             {{ item.description }}
-            <button (click)="editItem(item)">Edit</button>
+            <button (click)="startEditingTodo(item)">Edit</button>
+            <button (click)="deleteTodo(item)">Delete</button>
         </li>
     }
 </ul>
